@@ -36,7 +36,7 @@ claude plugin uninstall {{upstream.pluginName}}@claude-plugins-official
 npx skills@latest add {{githubRepo}}
 ```
 
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.** That setup skill keeps its upstream name on purpose.
+Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-john-skills` is one of them.** If the installer lists skills individually, also take `setup-matt-pocock-skills`: that folder is the procedure `/setup-john-skills` follows, not the command you type.
 
 A native Codex plugin is on the roadmap in upstream (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
 
@@ -54,3 +54,15 @@ npx skills@latest add {{githubRepo}}
 It writes the skills into your repo as ordinary files you own and can edit. Pull this fork when you want its latest, and run `scripts/sync-upstream.sh` in **this** repo when you want Matt's latest folded in (see [FORK.md](./FORK.md)).
 
 </details>
+
+### 2. Run `/setup-john-skills`
+
+In your agent, in the **consumer** repo (the project you are building, not the catalog), run it once. It will:
+
+- Ask you which issue tracker you want to use (GitHub, GitLab, local files, Linear, or anything else you describe)
+- Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
+- Ask you where you want to save any docs we create
+
+That is this fork's setup command. Do not type `/setup-matt-pocock-skills`.
+
+### 3. Bam - you're ready to go.

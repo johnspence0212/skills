@@ -120,18 +120,31 @@ function overlayReadme(source) {
     installInner,
   );
   if (markedInstall) {
-    return markedInstall.endsWith("\n") ? markedInstall : `${markedInstall}\n`;
+    next = markedInstall;
+  } else {
+    const start = next.indexOf("## Installation");
+    const stop = next.indexOf("## Why These Skills Exist");
+    if (start === -1 || stop === -1) {
+      throw new Error(
+        "README.md is missing '## Installation' or '## Why These Skills Exist'; cannot overlay the install section.",
+      );
+    }
+    next = `${next.slice(0, start)}<!-- FORK-INSTALL-BEGIN -->\n${installInner}\n<!-- FORK-INSTALL-END -->\n\n${next.slice(stop)}`;
   }
 
-  const start = next.indexOf("## Installation");
-  const stop = next.indexOf("### 2. Run");
-  if (start === -1 || stop === -1) {
-    throw new Error(
-      "README.md is missing '## Installation' or '### 2. Run'; cannot overlay the install section.",
-    );
+  const endMarker = "<!-- FORK-INSTALL-END -->";
+  const endIdx = next.indexOf(endMarker);
+  const whyIdx = next.indexOf("\n## Why These Skills Exist", endIdx);
+  if (endIdx !== -1 && whyIdx !== -1) {
+    next = `${next.slice(0, endIdx + endMarker.length)}\n${next.slice(whyIdx)}`;
   }
-  const spliced = `${next.slice(0, start)}<!-- FORK-INSTALL-BEGIN -->\n${installInner}\n<!-- FORK-INSTALL-END -->\n\n${next.slice(stop)}`;
-  return spliced.endsWith("\n") ? spliced : `${spliced}\n`;
+
+  next = next.replace(
+    /^- \*\*\[setup-matt-pocock-skills\]\(\.\/skills\/engineering\/setup-matt-pocock-skills\/SKILL\.md\)\*\*:.*$/m,
+    `- **[${cfg.setupSkill}](./skills/personal/${cfg.setupSkill}/SKILL.md)**: Configure a consumer repo for these skills (issue tracker, triage labels, domain doc layout). Run once per repo. The upstream \`setup-matt-pocock-skills\` folder is the procedure it follows, not the command you type.`,
+  );
+
+  return next.endsWith("\n") ? next : `${next}\n`;
 }
 
 function overlayClaudeMd(source) {
@@ -157,6 +170,23 @@ function overlayCopied(snippetRel) {
   return text.endsWith("\n") ? text : `${text}\n`;
 }
 
+function overlayTextReplacements(source, rel) {
+  let next = source;
+  for (const rule of cfg.textReplacements ?? []) {
+    if (!(rule.files ?? []).includes(rel)) {
+      continue;
+    }
+    next = next.replaceAll(rule.from, interpolate(rule.to));
+  }
+  return next;
+}
+
+function isReplacementFile(rel) {
+  return (cfg.textReplacements ?? []).some((rule) =>
+    (rule.files ?? []).includes(rel),
+  );
+}
+
 const overlays = {
   "package.json": overlayPackageJson,
   ".claude-plugin/plugin.json": overlayPluginJson,
@@ -168,9 +198,14 @@ const overlays = {
 let stale = 0;
 for (const rel of cfg.managedFiles) {
   const copiedFrom = cfg.copiedFiles?.[rel];
-  const overlay = copiedFrom
-    ? () => overlayCopied(copiedFrom)
-    : overlays[rel];
+  let overlay;
+  if (copiedFrom) {
+    overlay = () => overlayCopied(copiedFrom);
+  } else if (overlays[rel]) {
+    overlay = overlays[rel];
+  } else if (isReplacementFile(rel)) {
+    overlay = (source) => overlayTextReplacements(source, rel);
+  }
   if (!overlay) {
     throw new Error(`No overlay implementation for managed file ${rel}`);
   }

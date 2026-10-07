@@ -23,10 +23,26 @@
     "check-fork-overlay": "node scripts/apply-fork-overlay.mjs --check",
     "sync-upstream": "bash scripts/sync-upstream.sh"
   },
+  "setupSkill": "setup-john-skills",
   "copiedFiles": {
     ".agents/install-block.md": "install-block.md",
     "skills/productivity/grilling/SKILL.md": "skills/grilling.md"
   },
+  "textReplacements": [
+    {
+      "from": "/setup-matt-pocock-skills",
+      "to": "/{{setupSkill}}",
+      "files": [
+        "skills/engineering/ask-matt/SKILL.md",
+        "skills/engineering/to-spec/SKILL.md",
+        "skills/engineering/to-tickets/SKILL.md",
+        "skills/engineering/triage/SKILL.md",
+        "skills/engineering/wayfinder/SKILL.md",
+        "skills/engineering/code-review/SKILL.md",
+        "skills/engineering/implement-spec/SKILL.md"
+      ]
+    }
+  ],
   "managedFiles": [
     "package.json",
     ".claude-plugin/plugin.json",
@@ -34,6 +50,13 @@
     "README.md",
     "CLAUDE.md",
     ".agents/install-block.md",
-    "skills/productivity/grilling/SKILL.md"
+    "skills/productivity/grilling/SKILL.md",
+    "skills/engineering/ask-matt/SKILL.md",
+    "skills/engineering/to-spec/SKILL.md",
+    "skills/engineering/to-tickets/SKILL.md",
+    "skills/engineering/triage/SKILL.md",
+    "skills/engineering/wayfinder/SKILL.md",
+    "skills/engineering/code-review/SKILL.md",
+    "skills/engineering/implement-spec/SKILL.md"
   ]
 }

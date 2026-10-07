@@ -40,12 +40,13 @@ Exits 1 when a managed file does not match what the overlay would write. CI runs
 | Want | Do this |
 |---|---|
 | A new skill you actually run | Add it under `skills/personal/<name>/` (`SKILL.md` plus `agents/openai.yaml`). Update [`skills/personal/ask-me/SKILL.md`](./skills/personal/ask-me/SKILL.md) and [`skills/personal/README.md`](./skills/personal/README.md). Run the overlay so the plugin list picks it up. |
+| Change the consumer setup command | Edit `skills/personal/setup-john-skills/` and `setupSkill` in `fork/config.json`, then run the overlay. |
 | Different plugin name, author, or GitHub repo | Edit `fork/config.json` only, then run the overlay. |
 | Different install wording | Edit `fork/install-block.md` and `fork/readme-install.md`, then run the overlay. |
 | Change how grilling asks questions | Edit [`fork/skills/grilling.md`](./fork/skills/grilling.md), then run the overlay. Do not edit `skills/productivity/grilling/SKILL.md` by hand. |
 | Drop or change an upstream skill | Do not delete it. Leave it stock so the next merge does not resurrect a fight. If you really do not want it in the plugin, that is a future overlay feature; today the plugin still ships the full upstream promoted set plus personal. |
 
-`/setup-matt-pocock-skills` is still the per-repo setup skill. It can record Linear (or anything else) as a freeform tracker. Do not fork that skill to rename it.
+Consumer setup is **`/setup-john-skills`**. That personal skill follows the upstream `setup-matt-pocock-skills` procedure (and needs that folder installed for its templates). Do not rename the upstream folder. The overlay rewrites `/setup-matt-pocock-skills` pointers in a listed set of engineering SKILL.md files so `/to-spec`, `/to-tickets`, and friends tell the user to run `/setup-john-skills`.
 
 ## Overlay-managed files
 

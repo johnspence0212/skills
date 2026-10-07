@@ -12,7 +12,7 @@
 > npx skills@latest add {{githubRepo}}
 > ```
 >
-> Personal router: **[/ask-me](./skills/personal/ask-me/SKILL.md)**. Upstream catalog: type `/ask-matt`.
+> Personal: **[/ask-me](./skills/personal/ask-me/SKILL.md)**, **[/setup-john-skills](./skills/personal/setup-john-skills/SKILL.md)**. Upstream catalog: type `/ask-matt`.
 
 ---
 <!-- FORK-BANNER-END -->

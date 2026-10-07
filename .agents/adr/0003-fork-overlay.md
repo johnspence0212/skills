@@ -22,6 +22,12 @@ Keep a **declarative overlay** in `fork/`:
 
 The Claude plugin for this fork ships the full upstream promoted set **plus** every `skills/personal/*/SKILL.md`. Personal skills get no aihero.dev docs page.
 
+## Exception: consumer setup
+
+The command a consumer types is `/setup-john-skills` (`skills/personal/setup-john-skills`). It does not duplicate the setup procedure. It reads the sibling `setup-matt-pocock-skills` folder and follows it, because that folder is also where the tracker templates live. User-invoked skills cannot call each other, so the wrapper loads the procedure by reading `SKILL.md`, not via the Skill tool.
+
+A listed set of engineering SKILL.md files still tell the user to run `/setup-matt-pocock-skills`. The overlay rewrites those slash-command pointers to `/setup-john-skills`. Those files are overlay-managed: take upstream on conflict, then re-replace. The upstream setup skill itself stays stock so its procedure and templates keep merging.
+
 ## Exception: grilling
 
 Upstream grilling asks in plain chat with ❓ / ➡️ icons and refuses harness question UIs (see `.out-of-scope/native-question-tool.md`). This fork is Cursor-first. `fork/skills/grilling.md` is copied onto `skills/productivity/grilling/SKILL.md` so `/grill-me`, `/grill-with-docs`, `/triage`, `/wayfinder`, and `/improve-codebase-architecture` all pick up Cursor's `AskQuestion` tool without each wrapper being patched. The design tree, frontier, facts-vs-decisions split, and confirmation gate stay. After an upstream grilling change, port interview-rule diffs into `fork/skills/grilling.md`; do not port the icon format back.

@@ -40,7 +40,7 @@ The plugin is Claude Code only. Everywhere else, skills.sh copies editable skill
 npx skills@latest add {{githubRepo}}
 ```
 
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take: make sure `setup-matt-pocock-skills` is one of them.** That setup skill is still named as upstream named it, so merges stay easy.
+Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take: make sure `setup-john-skills` is one of them.** If the installer lists skills individually, also take `setup-matt-pocock-skills`: that folder is the procedure `/setup-john-skills` follows, not the command you type.
 
 </canonical-block>
 

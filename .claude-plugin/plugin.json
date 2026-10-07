@@ -46,6 +46,7 @@
     "./skills/productivity/to-questionnaire",
     "./skills/productivity/wait-what",
     "./skills/productivity/writing-for-agents",
-    "./skills/personal/ask-me"
+    "./skills/personal/ask-me",
+    "./skills/personal/setup-john-skills"
   ]
 }
