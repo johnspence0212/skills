@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ask Me"
+  short_description: "Find the right personal skill; type /ask-matt for the rest"
+policy:
+  allow_implicit_invocation: false

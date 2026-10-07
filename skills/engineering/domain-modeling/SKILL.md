@@ -37,7 +37,7 @@ If a `GLOSSARY-MAP.md` exists at the root, the repo has multiple contexts. The m
 │       └── docs/adr/
 ```
 
-Create files lazily: only when you have something to write. If no `GLOSSARY.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+Create files lazily: only when you have something to write. If `docs/agents/issue-tracker.md` or `docs/agents/domain.md` says not to create glossary or ADR files, follow that: discuss terms in the session, and persist them as tracker comments only when they need to outlive the session. Do not create `GLOSSARY.md` or `docs/adr/` unless the user explicitly asks. Otherwise, if no `GLOSSARY.md` exists, create one when the first term is resolved, and if no `docs/adr/` exists, create it when the first ADR is needed.
 
 ## During the session
 
@@ -59,7 +59,7 @@ When the user states how something works, check whether the code agrees. If you 
 
 ### Update GLOSSARY.md inline
 
-When a term is resolved, update `GLOSSARY.md` right there. Don't batch these up: capture them as they happen. Use the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).
+When a term is resolved, capture it right there. Don't batch these up. If `docs/agents/domain.md` or `docs/agents/issue-tracker.md` says not to write glossary files, persist the term as a tracker comment (or in the session if it does not need to outlive it) instead of creating or updating `GLOSSARY.md`. Otherwise update `GLOSSARY.md` using the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).
 
 `GLOSSARY.md` should be totally devoid of implementation details. Do not treat `GLOSSARY.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
 
@@ -71,4 +71,4 @@ Only offer to create an ADR when all three are true:
 2. **Surprising without context**: a future reader will wonder "why did they do it this way?"
 3. **The result of a real trade-off**: there were genuine alternatives and you picked one for specific reasons
 
-If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
+If any of the three is missing, skip the ADR. If `docs/agents/domain.md` or `docs/agents/issue-tracker.md` says not to create ADR files, do not write `docs/adr/` unless the user explicitly asks; persist the decision as a tracker comment instead. Otherwise use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).

@@ -1,3 +1,22 @@
+<!-- FORK-BANNER-BEGIN -->
+> **This fork:** [johnspence0212/skills](https://github.com/johnspence0212/skills) tracks [mattpocock/skills](https://github.com/mattpocock/skills). Upstream skill files stay stock so merges stay boring. Fork-only skills live in [`skills/personal/`](./skills/personal/). How to pull updates: [FORK.md](./FORK.md).
+>
+> **Install this repo** (not the official `mattpocock-skills` marketplace pin):
+>
+> ```bash
+> claude plugin marketplace add johnspence0212/skills
+> claude plugin install johnspence-skills@johnspence
+> ```
+>
+> ```bash
+> npx skills@latest add johnspence0212/skills
+> ```
+>
+> Personal: **[/ask-me](./skills/personal/ask-me/SKILL.md)**, **[/setup-john-skills](./skills/personal/setup-john-skills/SKILL.md)**. Upstream catalog: type `/ask-matt`.
+
+---
+<!-- FORK-BANNER-END -->
+
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
     <picture>
@@ -22,9 +41,10 @@ If you want to keep up with changes to these skills, and any new ones I create, 
 
 [Sign Up To The Newsletter](https://www.aihero.dev/s/skills-newsletter)
 
+<!-- FORK-INSTALL-BEGIN -->
 ## Installation (30-second setup)
 
-Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when Anthropic's marketplace picks up my releases, so you subscribe rather than fork. **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
+Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** from this fork is a marketplace you add yourself (this repo is not on Anthropic's official listing). **skills.sh** copies editable skill files into your project from [johnspence0212/skills](https://github.com/johnspence0212/skills). Pick one: installing both leaves you with every skill twice.
 
 ### 1. Get the skills
 
@@ -32,23 +52,23 @@ Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.co
 <summary><strong>Claude Code</strong></summary>
 
 ```bash
-claude plugins install mattpocock-skills
+claude plugin marketplace add johnspence0212/skills
+claude plugin install johnspence-skills@johnspence
 ```
 
 Or, from inside a session:
 
 ```
-/plugin install mattpocock-skills
+/plugin marketplace add johnspence0212/skills
+/plugin install johnspence-skills@johnspence
 ```
 
-It's in Claude Code's official marketplace, so there's nothing to add first. If it says the plugin isn't found, run `claude plugins marketplace update` and retry. Updates reach you when Anthropic's marketplace moves its pin to a new release, which can lag behind this repo by days or weeks.
+This fork is its own marketplace, not Anthropic's official listing. Add the marketplace once, then install. Turn on auto-update for it under `/plugin` → Marketplaces if you want installs to follow this repo.
 
-**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](./CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
+If you still have the upstream plugin installed, uninstall it first so you do not end up with every skill twice:
 
 ```bash
 claude plugin uninstall mattpocock-skills@claude-plugins-official
-claude plugin marketplace add mattpocock/skills
-claude plugin install mattpocock-skills@mattpocock
 ```
 
 </details>
@@ -57,12 +77,12 @@ claude plugin install mattpocock-skills@mattpocock
 <summary><strong>Codex, and other agents</strong></summary>
 
 ```bash
-npx skills@latest add mattpocock/skills
+npx skills@latest add johnspence0212/skills
 ```
 
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
+Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-john-skills` is one of them.** If the installer lists skills individually, also take `setup-matt-pocock-skills`: that folder is the procedure `/setup-john-skills` follows, not the command you type.
 
-A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
+A native Codex plugin is on the roadmap in upstream (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
 
 </details>
 
@@ -72,22 +92,25 @@ A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude
 Use the same installer, on any agent, including Claude Code:
 
 ```bash
-npx skills@latest add mattpocock/skills
+npx skills@latest add johnspence0212/skills
 ```
 
-It writes the skills into your repo as ordinary files you own and can edit. Nothing updates behind your back; pull my latest changes when you want them with `npx skills update`.
+It writes the skills into your repo as ordinary files you own and can edit. Pull this fork when you want its latest, and run `scripts/sync-upstream.sh` in **this** repo when you want Matt's latest folded in (see [FORK.md](./FORK.md)).
 
 </details>
 
-### 2. Run `/setup-matt-pocock-skills`
+### 2. Run `/setup-john-skills`
 
-In your agent, run it once per repo. It will:
+In your agent, in the **consumer** repo (the project you are building, not the catalog), run it once. It will:
 
-- Ask you which issue tracker you want to use (GitHub, GitLab, local files, or anything else you describe)
+- Recommend **Nonlinear** as the issue tracker (say yes, or pick GitHub / GitLab / local / other)
 - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
-- Ask you where you want to save any docs we create
+- Write the tracker runbook under `docs/agents/` (the only files setup should add). On Nonlinear, later research and similar notes are issue comments, not repo files.
+
+That is this fork's setup command. Do not type `/setup-matt-pocock-skills`.
 
 ### 3. Bam - you're ready to go.
+<!-- FORK-INSTALL-END -->
 
 ## Why These Skills Exist
 
@@ -203,7 +226,7 @@ Skills I use daily for code work.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/engineering/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo before using the other engineering skills.
+- **[setup-john-skills](./skills/personal/setup-john-skills/SKILL.md)**: Configure a consumer repo for these skills (issue tracker, triage labels, domain doc layout). Run once per repo. The upstream `setup-matt-pocock-skills` folder is the procedure it follows, not the command you type.
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview, just synthesizes what you've already discussed.
 - **[to-tickets](./skills/engineering/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
 - **[implement](./skills/engineering/implement/SKILL.md)**: Build the work described by a spec or set of tickets, driving `/tdd` at pre-agreed seams and closing out with `/code-review` before committing.

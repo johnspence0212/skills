@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup John Skills"
+  short_description: "Configure a repo for these skills"
+policy:
+  allow_implicit_invocation: false

@@ -2,22 +2,22 @@
 
 One install story, one wording. Change it here first, then run `node scripts/apply-fork-overlay.mjs` so `.agents/install-block.md` and the README install section stay in sync.
 
-This repo is a tracked fork of [mattpocock/skills](https://github.com/mattpocock/skills). It is **not** on Claude Code's official marketplace. The primary Claude route is this repo's own marketplace. **[skills.sh](https://skills.sh/johnspence0212/skills)** copies editable skill files into a project from this GitHub repo.
+This repo is a tracked fork of [mattpocock/skills](https://github.com/mattpocock/skills). It is **not** on Claude Code's official marketplace. The primary Claude route is this repo's own marketplace. **[skills.sh](https://skills.sh/{{githubRepo}})** copies editable skill files into a project from this GitHub repo.
 
 ## Claude Code: the plugin
 
 <canonical-block name="claude-code">
 
 ```bash
-claude plugin marketplace add johnspence0212/skills
-claude plugin install johnspence-skills@johnspence
+claude plugin marketplace add {{githubRepo}}
+claude plugin install {{pluginName}}@{{marketplaceName}}
 ```
 
 Or, from inside a session:
 
 ```
-/plugin marketplace add johnspence0212/skills
-/plugin install johnspence-skills@johnspence
+/plugin marketplace add {{githubRepo}}
+/plugin install {{pluginName}}@{{marketplaceName}}
 ```
 
 This fork is its own marketplace, not Anthropic's official listing. Add the marketplace once, then install. Turn on auto-update for it under `/plugin` → Marketplaces if you want installs to follow this repo.
@@ -25,7 +25,7 @@ This fork is its own marketplace, not Anthropic's official listing. Add the mark
 If you still have the upstream plugin installed, uninstall it first so you do not end up with every skill twice:
 
 ```bash
-claude plugin uninstall mattpocock-skills@claude-plugins-official
+claude plugin uninstall {{upstream.pluginName}}@claude-plugins-official
 ```
 
 </canonical-block>
@@ -37,7 +37,7 @@ The plugin is Claude Code only. Everywhere else, skills.sh copies editable skill
 <canonical-block name="skills-sh-whole-set">
 
 ```bash
-npx skills@latest add johnspence0212/skills
+npx skills@latest add {{githubRepo}}
 ```
 
 Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take: make sure `setup-john-skills` is one of them.** If the installer lists skills individually, also take `setup-matt-pocock-skills`: that folder is the procedure `/setup-john-skills` follows, not the command you type.
@@ -49,7 +49,7 @@ Pick the skills you want, and which coding agents to install them on. **The inst
 <canonical-block name="skills-sh-one-skill">
 
 ```bash
-npx skills@latest add johnspence0212/skills --skill=<name>
+npx skills@latest add {{githubRepo}} --skill=<name>
 ```
 
 ```bash
