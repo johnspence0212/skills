@@ -105,7 +105,7 @@ In your agent, in the **consumer** repo (the project you are building, not the c
 
 - Recommend **Nonlinear** as the issue tracker (say yes, or pick GitHub / GitLab / local / other)
 - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
-- Ask you where you want to save any docs we create
+- Write the tracker runbook under `docs/agents/` (the only files setup should add). On Nonlinear, later research and similar notes are issue comments, not repo files.
 
 That is this fork's setup command. Do not type `/setup-matt-pocock-skills`.
 

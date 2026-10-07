@@ -26,7 +26,7 @@ The Claude plugin for this fork ships the full upstream promoted set **plus** ev
 
 The command a consumer types is `/setup-john-skills` (`skills/personal/setup-john-skills`). It does not duplicate the setup procedure. It reads the sibling `setup-matt-pocock-skills` folder and follows it, because that folder is also where the tracker templates live. User-invoked skills cannot call each other, so the wrapper loads the procedure by reading `SKILL.md`, not via the Skill tool.
 
-Section A recommends **Nonlinear** (Cursor MCP `nonlinear`, not Linear.app) instead of GitHub-because-remote. The seed files sit in the personal setup folder so skills.sh copies them into consumers, and so deleting that override plus those two markdown files removes the default without touching overlay-managed upstream files.
+Section A recommends **Nonlinear** (Cursor MCP `nonlinear`, not Linear.app) instead of GitHub-because-remote. The seed files sit in the personal setup folder so skills.sh copies them into consumers, and so deleting the Section A / Section C overrides plus those three markdown files (`issue-tracker-nonlinear.md`, `triage-labels-nonlinear.md`, `domain-nonlinear.md`) removes the default without touching overlay-managed upstream files.
 
 A listed set of engineering SKILL.md files still tell the user to run `/setup-matt-pocock-skills`. The overlay rewrites those slash-command pointers to `/setup-john-skills`. Those files are overlay-managed: take upstream on conflict, then re-replace. The upstream setup skill itself stays stock so its procedure and templates keep merging.
 
@@ -35,6 +35,14 @@ A listed set of engineering SKILL.md files still tell the user to run `/setup-ma
 Upstream grilling asks in plain chat with ❓ / ➡️ icons and refuses harness question UIs (see `.out-of-scope/native-question-tool.md`). This fork is Cursor-first. `fork/skills/grilling.md` is copied onto `skills/productivity/grilling/SKILL.md` so `/grill-me`, `/grill-with-docs`, `/triage`, `/wayfinder`, and `/improve-codebase-architecture` all pick up Cursor's `AskQuestion` tool without each wrapper being patched. The design tree, frontier, facts-vs-decisions split, and confirmation gate stay. After an upstream grilling change, port interview-rule diffs into `fork/skills/grilling.md`; do not port the icon format back.
 
 This is a listed overlay, not an in-place edit of an unmanaged skill.
+
+## Exception: Nonlinear artifacts stay off git
+
+Upstream `research` always writes a Markdown file. Upstream `wayfinder` captures research on a throwaway `research/<name>` branch. Upstream `domain-modeling` creates `GLOSSARY.md` and ADRs lazily. This fork's default consumer tracker is Nonlinear, and those artifacts belong on the issue as comments, not in git.
+
+The policy itself lives in the personal setup seeds (`issue-tracker-nonlinear.md` **Artifacts**, `domain-nonlinear.md`), so deleting those seeds restores upstream file writes for new consumer setups. Skills that never read the tracker still have to be told: `fork/skills/research.md` is copied onto `skills/engineering/research/SKILL.md`, and small text replacements on `wayfinder`, `domain-modeling`, `triage`, and `improve-codebase-architecture` consult that Artifacts / domain doc. Those replacements no-op when the consumer tracker has no Artifacts section.
+
+Do not patch `ask-matt` for this. `/ask-me` states the Nonlinear default.
 
 ## Why not the alternatives
 
@@ -45,7 +53,7 @@ This is a listed overlay, not an in-place edit of an unmanaged skill.
 
 ## Invariants
 
-- Do not rename or edit upstream skills to add fork behaviour, except overlay copies listed in `fork/config.json`'s `copiedFiles`.
+- Do not rename or edit upstream skills to add fork behaviour, except overlay copies and text replacements listed in `fork/config.json`.
 - New daily-driver skills this fork owns go in `skills/personal/`, and `/ask-me` must mention them.
 - Overlay-managed files are listed once, in `fork/config.json`. Adding a new managed file is a deliberate expansion of the conflict surface.
 - After every overlay change, `node scripts/apply-fork-overlay.mjs --check` is clean.

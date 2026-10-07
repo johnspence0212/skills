@@ -26,7 +26,8 @@
   "setupSkill": "setup-john-skills",
   "copiedFiles": {
     ".agents/install-block.md": "install-block.md",
-    "skills/productivity/grilling/SKILL.md": "skills/grilling.md"
+    "skills/productivity/grilling/SKILL.md": "skills/grilling.md",
+    "skills/engineering/research/SKILL.md": "skills/research.md"
   },
   "textReplacements": [
     {
@@ -41,6 +42,36 @@
         "skills/engineering/code-review/SKILL.md",
         "skills/engineering/implement-spec/SKILL.md"
       ]
+    },
+    {
+      "from": "capturing its findings on a throwaway `research/<name>` branch with a context pointer from the ticket. Push the branch but open no PR: it is never merged.",
+      "to": "capturing its findings where the tracker doc's **Artifacts** section says they live. If that section is missing, fall back to a throwaway `research/<name>` branch with a context pointer from the ticket (push the branch, open no PR, never merge).",
+      "files": ["skills/engineering/wayfinder/SKILL.md"]
+    },
+    {
+      "from": "Create files lazily: only when you have something to write. If no `GLOSSARY.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.",
+      "to": "Create files lazily: only when you have something to write. If `docs/agents/issue-tracker.md` or `docs/agents/domain.md` says not to create glossary or ADR files, follow that: discuss terms in the session, and persist them as tracker comments only when they need to outlive the session. Do not create `GLOSSARY.md` or `docs/adr/` unless the user explicitly asks. Otherwise, if no `GLOSSARY.md` exists, create one when the first term is resolved, and if no `docs/adr/` exists, create it when the first ADR is needed.",
+      "files": ["skills/engineering/domain-modeling/SKILL.md"]
+    },
+    {
+      "from": "When a term is resolved, update `GLOSSARY.md` right there. Don't batch these up: capture them as they happen. Use the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).",
+      "to": "When a term is resolved, capture it right there. Don't batch these up. If `docs/agents/domain.md` or `docs/agents/issue-tracker.md` says not to write glossary files, persist the term as a tracker comment (or in the session if it does not need to outlive it) instead of creating or updating `GLOSSARY.md`. Otherwise update `GLOSSARY.md` using the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).",
+      "files": ["skills/engineering/domain-modeling/SKILL.md"]
+    },
+    {
+      "from": "If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).",
+      "to": "If any of the three is missing, skip the ADR. If `docs/agents/domain.md` or `docs/agents/issue-tracker.md` says not to create ADR files, do not write `docs/adr/` unless the user explicitly asks; persist the decision as a tracker comment instead. Otherwise use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).",
+      "files": ["skills/engineering/domain-modeling/SKILL.md"]
+    },
+    {
+      "from": "sharpening domain terms and updating `GLOSSARY.md`/ADRs inline as decisions land.",
+      "to": "sharpening domain terms as decisions land. Follow `docs/agents/domain.md` for whether those become `GLOSSARY.md`/ADR files or stay in the session (and on the tracker if that doc says so).",
+      "files": ["skills/engineering/triage/SKILL.md"]
+    },
+    {
+      "from": "- **Naming a deepened module after a concept not in `GLOSSARY.md`?** Add the term to `GLOSSARY.md`. Create the file lazily if it doesn't exist.\n- **Sharpening a fuzzy term during the conversation?** Update `GLOSSARY.md` right there.",
+      "to": "- **Naming a deepened module after a concept not in `GLOSSARY.md`?** Follow `docs/agents/domain.md`: add the term to `GLOSSARY.md` only when that doc allows creating or updating it; otherwise comment the term on the tracker issue. Do not create the file just to have one.\n- **Sharpening a fuzzy term during the conversation?** Same rule: update `GLOSSARY.md` only when `docs/agents/domain.md` allows it.",
+      "files": ["skills/engineering/improve-codebase-architecture/SKILL.md"]
     }
   ],
   "managedFiles": [
@@ -51,12 +82,15 @@
     "CLAUDE.md",
     ".agents/install-block.md",
     "skills/productivity/grilling/SKILL.md",
+    "skills/engineering/research/SKILL.md",
     "skills/engineering/ask-matt/SKILL.md",
     "skills/engineering/to-spec/SKILL.md",
     "skills/engineering/to-tickets/SKILL.md",
     "skills/engineering/triage/SKILL.md",
     "skills/engineering/wayfinder/SKILL.md",
     "skills/engineering/code-review/SKILL.md",
-    "skills/engineering/implement-spec/SKILL.md"
+    "skills/engineering/implement-spec/SKILL.md",
+    "skills/engineering/domain-modeling/SKILL.md",
+    "skills/engineering/improve-codebase-architecture/SKILL.md"
   ]
 }

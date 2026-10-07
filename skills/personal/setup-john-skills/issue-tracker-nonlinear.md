@@ -47,3 +47,20 @@ Used by `/wayfinder`. The **map** is one issue; its tickets are children via `pa
 - **Resolve**: `resolve_issue` `{ "id": <int>, "answer": "<decision>", "author": "cursor" }`, then gist plus link on the map's Decisions-so-far (`get_issue` the map, `update_issue` the body).
 
 Do not call `wipe_db` from these skills.
+
+## Artifacts (do not write them to the repo)
+
+When this tracker is in use, operational notes do not go in git. **Product code** (the change you are actually shipping) still does. The one-time files `/setup-john-skills` writes under `docs/agents/` and the `## Agent skills` block are also allowed.
+
+Do not create, commit, or push:
+
+- Research markdown files
+- Throwaway `research/<name>` branches (or any branch whose only job is to hold notes)
+- `GLOSSARY.md`, `GLOSSARY-MAP.md`, or `docs/adr/` files, unless the user explicitly asks for a glossary or an ADR
+- Investigation dumps, scratch notes, handoff-style research write-ups, or similar planning artifacts
+
+**Research.** The cited findings are one Markdown `add_comment` on the originating issue (the wayfinder `wayfinder:research` ticket, or the issue the user named). If that issue is a wayfinder research ticket, then `resolve_issue` with a one-line gist of the answer (the comment is the detail). If there is no originating issue, `create_issue` with the question as the title and the findings as the body. Do not push a branch. Do not open a PR.
+
+**Glossary and ADRs.** Discuss terms in the session. `/domain-modeling` still challenges language and invents scenarios. Persist a term or a hard-to-reverse decision with `add_comment` on the relevant issue (the map, the spec, or the ticket being worked) when it must outlive the session. If `GLOSSARY.md` already exists, you may read it; do not update it unless asked.
+
+**When a skill says** "save a Markdown file", "capture on a `research/<name>` branch", or "update `GLOSSARY.md` / ADRs inline", and this doc is the tracker, that instruction means this section, not git.

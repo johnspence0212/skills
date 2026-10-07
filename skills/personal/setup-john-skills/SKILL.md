@@ -14,7 +14,7 @@ Find the sibling skill directory named `setup-matt-pocock-skills` (same skills t
 
 If that directory is missing, stop and tell the user to install the full set from `johnspence0212/skills` (this wrapper needs those procedure files). Do not invent a tracker layout.
 
-This skill's own folder (the directory that contains this `SKILL.md`) holds the Nonlinear seeds: `issue-tracker-nonlinear.md` and `triage-labels-nonlinear.md`.
+This skill's own folder (the directory that contains this `SKILL.md`) holds the Nonlinear seeds: `issue-tracker-nonlinear.md`, `triage-labels-nonlinear.md`, and `domain-nonlinear.md`.
 
 ## Overrides
 
@@ -40,11 +40,12 @@ Recommended answer: **Nonlinear** (Cursor MCP server `nonlinear`). One question,
 - For Section B (triage labels), if `triage` is installed: recommend the defaults (they match Nonlinear). Write `docs/agents/triage-labels.md` from `triage-labels-nonlinear.md` in this skill folder, not from the upstream GitHub-oriented seed.
 - After writing those files, if the `nonlinear` MCP is available, call `create_label` once per seed label (idempotent): `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`, `wayfinder:map`, `wayfinder:research`, `wayfinder:prototype`, `wayfinder:grilling`, `wayfinder:task`. Do not run `gh label create`.
 - If the MCP is not attached this session, still write the markdown files, then tell the user labels were not seeded and they should run setup again with Nonlinear connected, or create those labels themselves.
-- Section C (domain docs) follows upstream unchanged.
+- Section C (domain docs): do **not** follow upstream's "write a single-context glossary layout and let `/domain-modeling` create files lazily". Write `docs/agents/domain.md` from `domain-nonlinear.md` in this skill folder. Do not create `GLOSSARY.md`, `GLOSSARY-MAP.md`, or `docs/adr/`. Do not ask where to save docs we create: research and similar notes go on Nonlinear, not into git.
 - The `## Agent skills` / Issue tracker one-liner should say issues live in Nonlinear via the `nonlinear` MCP. See `docs/agents/issue-tracker.md`.
+- The Domain docs one-liner should say glossary and ADR files are off unless the user asks; terms persist as Nonlinear comments. See `docs/agents/domain.md`.
 
-**If no**: drop this Section A override and follow upstream Section A exactly (GitHub, GitLab, local markdown, or Other).
+**If no**: drop this override (tracker seed, triage seed, domain seed, and the Section C bullets above). Follow upstream Section A and Section C exactly (GitHub, GitLab, local markdown, or Other).
 
 ### Removable
 
-The Nonlinear default is only this folder: the Section A override in this file, plus `issue-tracker-nonlinear.md` and `triage-labels-nonlinear.md`. Upstream `setup-matt-pocock-skills` is untouched. To stop defaulting to Nonlinear, delete those two seeds and this Section A override; `/setup-john-skills` still runs and Section A falls through to upstream.
+The Nonlinear default is only this folder: the Section A and Section C overrides in this file, plus `issue-tracker-nonlinear.md`, `triage-labels-nonlinear.md`, and `domain-nonlinear.md`. Upstream `setup-matt-pocock-skills` is untouched. To stop defaulting to Nonlinear, delete those three seeds and the Section A / Section C overrides; `/setup-john-skills` still runs and those sections fall through to upstream.

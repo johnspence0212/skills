@@ -11,7 +11,7 @@ Router for **this fork's** skills in `skills/personal/`. It does not replace `/a
 ## Personal skills
 
 - **`/ask-me`**: this router.
-- **`/setup-john-skills`**: run once per consumer repo. Defaults the issue tracker to Nonlinear (Cursor MCP `nonlinear`). If another skill says to run `/setup-matt-pocock-skills`, that means this.
+- **`/setup-john-skills`**: run once per consumer repo. Defaults the issue tracker to Nonlinear (Cursor MCP `nonlinear`). If another skill says to run `/setup-matt-pocock-skills`, that means this. When Nonlinear is the tracker, research findings and similar notes are comments on the Nonlinear issue, not files or `research/` branches in git. Glossary and ADR files are not created unless you ask.
 
 When there is no personal skill for the job, say so. If the work is an upstream flow (grill, spec, tickets, implement, triage, architecture, and the rest), tell the user to type `/ask-matt`.
 
