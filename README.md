@@ -1,3 +1,22 @@
+<!-- FORK-BANNER-BEGIN -->
+> **This fork:** [johnspence0212/skills](https://github.com/johnspence0212/skills) tracks [mattpocock/skills](https://github.com/mattpocock/skills). Upstream skill files stay stock so merges stay boring. Fork-only skills live in [`skills/personal/`](./skills/personal/). How to pull updates: [FORK.md](./FORK.md).
+>
+> **Install this repo** (not the official `mattpocock-skills` marketplace pin):
+>
+> ```bash
+> claude plugin marketplace add johnspence0212/skills
+> claude plugin install johnspence-skills@johnspence
+> ```
+>
+> ```bash
+> npx skills@latest add johnspence0212/skills
+> ```
+>
+> Personal router: **[/ask-me](./skills/personal/ask-me/SKILL.md)**. Upstream catalog: type `/ask-matt`.
+
+---
+<!-- FORK-BANNER-END -->
+
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
     <picture>
@@ -22,9 +41,10 @@ If you want to keep up with changes to these skills, and any new ones I create, 
 
 [Sign Up To The Newsletter](https://www.aihero.dev/s/skills-newsletter)
 
+<!-- FORK-INSTALL-BEGIN -->
 ## Installation (30-second setup)
 
-Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when Anthropic's marketplace picks up my releases, so you subscribe rather than fork. **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
+Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** from this fork is a marketplace you add yourself (this repo is not on Anthropic's official listing). **skills.sh** copies editable skill files into your project from [johnspence0212/skills](https://github.com/johnspence0212/skills). Pick one: installing both leaves you with every skill twice.
 
 ### 1. Get the skills
 
@@ -32,23 +52,23 @@ Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.co
 <summary><strong>Claude Code</strong></summary>
 
 ```bash
-claude plugins install mattpocock-skills
+claude plugin marketplace add johnspence0212/skills
+claude plugin install johnspence-skills@johnspence
 ```
 
 Or, from inside a session:
 
 ```
-/plugin install mattpocock-skills
+/plugin marketplace add johnspence0212/skills
+/plugin install johnspence-skills@johnspence
 ```
 
-It's in Claude Code's official marketplace, so there's nothing to add first. If it says the plugin isn't found, run `claude plugins marketplace update` and retry. Updates reach you when Anthropic's marketplace moves its pin to a new release, which can lag behind this repo by days or weeks.
+This fork is its own marketplace, not Anthropic's official listing. Add the marketplace once, then install. Turn on auto-update for it under `/plugin` → Marketplaces if you want installs to follow this repo.
 
-**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](./CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
+If you still have the upstream plugin installed, uninstall it first so you do not end up with every skill twice:
 
 ```bash
 claude plugin uninstall mattpocock-skills@claude-plugins-official
-claude plugin marketplace add mattpocock/skills
-claude plugin install mattpocock-skills@mattpocock
 ```
 
 </details>
@@ -57,12 +77,12 @@ claude plugin install mattpocock-skills@mattpocock
 <summary><strong>Codex, and other agents</strong></summary>
 
 ```bash
-npx skills@latest add mattpocock/skills
+npx skills@latest add johnspence0212/skills
 ```
 
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
+Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.** That setup skill keeps its upstream name on purpose.
 
-A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
+A native Codex plugin is on the roadmap in upstream (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
 
 </details>
 
@@ -72,12 +92,13 @@ A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude
 Use the same installer, on any agent, including Claude Code:
 
 ```bash
-npx skills@latest add mattpocock/skills
+npx skills@latest add johnspence0212/skills
 ```
 
-It writes the skills into your repo as ordinary files you own and can edit. Nothing updates behind your back; pull my latest changes when you want them with `npx skills update`.
+It writes the skills into your repo as ordinary files you own and can edit. Pull this fork when you want its latest, and run `scripts/sync-upstream.sh` in **this** repo when you want Matt's latest folded in (see [FORK.md](./FORK.md)).
 
 </details>
+<!-- FORK-INSTALL-END -->
 
 ### 2. Run `/setup-matt-pocock-skills`
 
