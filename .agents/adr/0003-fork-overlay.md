@@ -22,6 +22,12 @@ Keep a **declarative overlay** in `fork/`:
 
 The Claude plugin for this fork ships the full upstream promoted set **plus** every `skills/personal/*/SKILL.md`. Personal skills get no aihero.dev docs page.
 
+## Exception: grilling
+
+Upstream grilling asks in plain chat with ❓ / ➡️ icons and refuses harness question UIs (see `.out-of-scope/native-question-tool.md`). This fork is Cursor-first. `fork/skills/grilling.md` is copied onto `skills/productivity/grilling/SKILL.md` so `/grill-me`, `/grill-with-docs`, `/triage`, `/wayfinder`, and `/improve-codebase-architecture` all pick up Cursor's `AskQuestion` tool without each wrapper being patched. The design tree, frontier, facts-vs-decisions split, and confirmation gate stay. After an upstream grilling change, port interview-rule diffs into `fork/skills/grilling.md`; do not port the icon format back.
+
+This is a listed overlay, not an in-place edit of an unmanaged skill.
+
 ## Why not the alternatives
 
 - **Rewrite README and skills in place.** Maximum "this is mine", maximum merge pain. Rejected.
@@ -31,7 +37,7 @@ The Claude plugin for this fork ships the full upstream promoted set **plus** ev
 
 ## Invariants
 
-- Do not rename or edit upstream skills to add fork behaviour.
+- Do not rename or edit upstream skills to add fork behaviour, except overlay copies listed in `fork/config.json`'s `copiedFiles`.
 - New daily-driver skills this fork owns go in `skills/personal/`, and `/ask-me` must mention them.
 - Overlay-managed files are listed once, in `fork/config.json`. Adding a new managed file is a deliberate expansion of the conflict surface.
 - After every overlay change, `node scripts/apply-fork-overlay.mjs --check` is clean.

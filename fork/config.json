@@ -23,12 +23,17 @@
     "check-fork-overlay": "node scripts/apply-fork-overlay.mjs --check",
     "sync-upstream": "bash scripts/sync-upstream.sh"
   },
+  "copiedFiles": {
+    ".agents/install-block.md": "install-block.md",
+    "skills/productivity/grilling/SKILL.md": "skills/grilling.md"
+  },
   "managedFiles": [
     "package.json",
     ".claude-plugin/plugin.json",
     ".claude-plugin/marketplace.json",
     "README.md",
     "CLAUDE.md",
-    ".agents/install-block.md"
+    ".agents/install-block.md",
+    "skills/productivity/grilling/SKILL.md"
   ]
 }

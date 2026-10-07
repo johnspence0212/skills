@@ -152,8 +152,8 @@ function overlayClaudeMd(source) {
   return `${trimmed}\n\n<!-- FORK-SECTION-BEGIN -->\n${inner}\n<!-- FORK-SECTION-END -->\n`;
 }
 
-function overlayInstallBlock() {
-  const text = readSnippet("install-block.md");
+function overlayCopied(snippetRel) {
+  const text = readSnippet(snippetRel);
   return text.endsWith("\n") ? text : `${text}\n`;
 }
 
@@ -163,12 +163,14 @@ const overlays = {
   ".claude-plugin/marketplace.json": overlayMarketplaceJson,
   "README.md": overlayReadme,
   "CLAUDE.md": overlayClaudeMd,
-  ".agents/install-block.md": () => overlayInstallBlock(),
 };
 
 let stale = 0;
 for (const rel of cfg.managedFiles) {
-  const overlay = overlays[rel];
+  const copiedFrom = cfg.copiedFiles?.[rel];
+  const overlay = copiedFrom
+    ? () => overlayCopied(copiedFrom)
+    : overlays[rel];
   if (!overlay) {
     throw new Error(`No overlay implementation for managed file ${rel}`);
   }
