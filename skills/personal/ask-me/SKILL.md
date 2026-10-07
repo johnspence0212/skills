@@ -11,7 +11,7 @@ Router for **this fork's** skills in `skills/personal/`. It does not replace `/a
 ## Personal skills
 
 - **`/ask-me`**: this router.
-- **`/setup-john-skills`**: run once per consumer repo. Configures the issue tracker, triage labels, and domain docs. If another skill says to run `/setup-matt-pocock-skills`, that means this.
+- **`/setup-john-skills`**: run once per consumer repo. Defaults the issue tracker to Nonlinear (Cursor MCP `nonlinear`). If another skill says to run `/setup-matt-pocock-skills`, that means this.
 
 When there is no personal skill for the job, say so. If the work is an upstream flow (grill, spec, tickets, implement, triage, architecture, and the rest), tell the user to type `/ask-matt`.
 

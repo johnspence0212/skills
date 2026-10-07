@@ -26,6 +26,8 @@ The Claude plugin for this fork ships the full upstream promoted set **plus** ev
 
 The command a consumer types is `/setup-john-skills` (`skills/personal/setup-john-skills`). It does not duplicate the setup procedure. It reads the sibling `setup-matt-pocock-skills` folder and follows it, because that folder is also where the tracker templates live. User-invoked skills cannot call each other, so the wrapper loads the procedure by reading `SKILL.md`, not via the Skill tool.
 
+Section A recommends **Nonlinear** (Cursor MCP `nonlinear`, not Linear.app) instead of GitHub-because-remote. The seed files sit in the personal setup folder so skills.sh copies them into consumers, and so deleting that override plus those two markdown files removes the default without touching overlay-managed upstream files.
+
 A listed set of engineering SKILL.md files still tell the user to run `/setup-matt-pocock-skills`. The overlay rewrites those slash-command pointers to `/setup-john-skills`. Those files are overlay-managed: take upstream on conflict, then re-replace. The upstream setup skill itself stays stock so its procedure and templates keep merging.
 
 ## Exception: grilling

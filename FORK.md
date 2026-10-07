@@ -41,12 +41,15 @@ Exits 1 when a managed file does not match what the overlay would write. CI runs
 |---|---|
 | A new skill you actually run | Add it under `skills/personal/<name>/` (`SKILL.md` plus `agents/openai.yaml`). Update [`skills/personal/ask-me/SKILL.md`](./skills/personal/ask-me/SKILL.md) and [`skills/personal/README.md`](./skills/personal/README.md). Run the overlay so the plugin list picks it up. |
 | Change the consumer setup command | Edit `skills/personal/setup-john-skills/` and `setupSkill` in `fork/config.json`, then run the overlay. |
+| Stop defaulting setup to Nonlinear | In `skills/personal/setup-john-skills/`, delete `issue-tracker-nonlinear.md`, `triage-labels-nonlinear.md`, and the Section A override in `SKILL.md`. Upstream Section A (GitHub / GitLab / local / Other) takes over. No overlay-managed files involved. |
 | Different plugin name, author, or GitHub repo | Edit `fork/config.json` only, then run the overlay. |
 | Different install wording | Edit `fork/install-block.md` and `fork/readme-install.md`, then run the overlay. |
 | Change how grilling asks questions | Edit [`fork/skills/grilling.md`](./fork/skills/grilling.md), then run the overlay. Do not edit `skills/productivity/grilling/SKILL.md` by hand. |
 | Drop or change an upstream skill | Do not delete it. Leave it stock so the next merge does not resurrect a fight. If you really do not want it in the plugin, that is a future overlay feature; today the plugin still ships the full upstream promoted set plus personal. |
 
 Consumer setup is **`/setup-john-skills`**. That personal skill follows the upstream `setup-matt-pocock-skills` procedure (and needs that folder installed for its templates). Do not rename the upstream folder. The overlay rewrites `/setup-matt-pocock-skills` pointers in a listed set of engineering SKILL.md files so `/to-spec`, `/to-tickets`, and friends tell the user to run `/setup-john-skills`.
+
+Section A **recommends Nonlinear** (MCP server `nonlinear`, not Linear.app). The seed lives in the personal setup folder so a consumer install copies it. To remove that default, see the table above. GitHub remains available if they say no.
 
 ## Overlay-managed files
 

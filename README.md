@@ -103,7 +103,7 @@ It writes the skills into your repo as ordinary files you own and can edit. Pull
 
 In your agent, in the **consumer** repo (the project you are building, not the catalog), run it once. It will:
 
-- Ask you which issue tracker you want to use (GitHub, GitLab, local files, Linear, or anything else you describe)
+- Recommend **Nonlinear** as the issue tracker (say yes, or pick GitHub / GitLab / local / other)
 - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
 - Ask you where you want to save any docs we create
 

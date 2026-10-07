@@ -7,4 +7,4 @@ They ship in **this fork's** Claude plugin (the overlay appends them). They get 
 See [FORK.md](../../FORK.md).
 
 - **[ask-me](./ask-me/SKILL.md)**: Ask which personal skill fits. For the upstream catalog, type `/ask-matt`.
-- **[setup-john-skills](./setup-john-skills/SKILL.md)**: Run once per consumer repo. The command you type instead of `/setup-matt-pocock-skills`.
+- **[setup-john-skills](./setup-john-skills/SKILL.md)**: Run once per consumer repo. Defaults to Nonlinear. The command you type instead of `/setup-matt-pocock-skills`.
